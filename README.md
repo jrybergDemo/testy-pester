@@ -66,7 +66,9 @@ $PesterConfig.Run.Path
 ````
 Output
 ```
-Default Description                                                                                 Value                                                                                                                                        ------- -----------                                                                                 -----                                                                                                                                        {.}     Directories to be searched for tests, paths directly to test files, or combination of both. {C:\Users\el-user}                                                                                                                           
+Default Description                                                                                 Value                                                              
+------- -----------                                                                                 -----                                                              
+{.}     Directories to be searched for tests, paths directly to test files, or combination of both. {C:\Users\el-user}                                                                                                                           
 ```
 ---
 ## Discovery vs Run
