@@ -68,17 +68,18 @@ Output
 ```
 Default Description                                                                                 Value                                                              
 ------- -----------                                                                                 -----                                                              
-{.}     Directories to be searched for tests, paths directly to test files, or combination of both. {C:\Users\el-user}                                                                                                                           
+{.}     Directories to be searched for tests, paths directly to test files, or combination of both. {C:\Users\el-user}
 ```
 ---
-## Discovery vs Run
+## Pester Execution
 - Pester runs your test files in two phases: Discovery and Run.
-   - Massive change over v4 - variables are only available in their scopes
+   - Massive change over v4
    - IMPORTANT: Variables initialized in Discovery are NOT available in Run
       - [Details here](https://pester-docs.netlify.app/docs/usage/discovery-and-run#execution-order)
+      - [Cheatsheet here](https://blog.roostech.se/posts/pester-5-discovery-and-testcases/)
 - During discovery, it 'scans' your test files and discovers all the Pester blocks.
   - `It`, `Before*`, & `After*` blocks are saved as ScriptBlocks but **not** executed.
-    - Exceptions are Before/AfterDiscovery blocks
+    - Exceptions are Before/AfterDiscovery blocks, which run during Discovery
   - `Describe` & `Context` blocks **are** executed
     - This is so that Pester can evaluate and save the `It` blocks
       - Builds the Tests using the `It` Names
@@ -109,7 +110,7 @@ $PesterConfig.CodeCoverage.Enabled = $true
    - Define data types
    - Etc, et al, ad infinitum
 - Act
-   - Execute the test by invoking the function
+   - Execute the test by invoking the thing
    - Capture the results for measurement/assertion
 - Assert
    - Verify the results of the test are what you expected

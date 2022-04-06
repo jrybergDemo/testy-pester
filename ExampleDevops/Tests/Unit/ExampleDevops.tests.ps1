@@ -23,7 +23,7 @@ Describe 'Function Remove-Image' {
         }
 
         Mock -CommandName Select-AzSubscription -ModuleName $global:moduleName #-MockWith { 'foo' }
-        Mock -CommandName Write-Information -ModuleName $global:moduleName
+        Mock -CommandName Write-Message -ModuleName $global:moduleName
     }
 
     Context 'Image does not exist' {
@@ -50,7 +50,7 @@ Describe 'Function Remove-Image' {
 
             Should -Invoke Select-AzSubscription -Times 1 -Scope 'Context' -Exactly -ModuleName $global:moduleName
             Should -Invoke Get-AzImage -Times 1 -Scope 'Context' -Exactly -ModuleName $global:moduleName
-            Should -Invoke Write-Information -Times 1 -Scope 'Context' -Exactly -ModuleName $global:moduleName
+            Should -Invoke Write-Message -Times 1 -Scope 'Context' -Exactly -ModuleName $global:moduleName
         }
     }
 
@@ -71,7 +71,7 @@ Describe 'Function Remove-Image' {
             Should -Invoke Remove-AzImage -Times 1 -Scope 'Context' -Exactly -ModuleName $global:moduleName
             Should -Invoke Get-AzImage -Times 1 -Scope 'Context' -Exactly -ModuleName $global:moduleName
             Should -Invoke Select-AzSubscription -Times 1 -Scope 'Context' -Exactly -ModuleName $global:moduleName
-            Should -Invoke Write-Information -Times 1 -Scope 'Context' -Exactly -ModuleName $global:moduleName
+            Should -Invoke Write-Message -Times 1 -Scope 'Context' -Exactly -ModuleName $global:moduleName
         }
     }
 }
