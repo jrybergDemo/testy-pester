@@ -4,6 +4,7 @@
 - GitHub [devopsjesus](https://github.com/devopsjesus)
 - 7th year with MS Consulting
 - Automation & efficiency enthusiast
+- Presentation found at: https://github.com/jrybergDemo/testy-pester
 
 ---
 ## What is Pester (TL;DR version)
@@ -112,15 +113,14 @@ $PesterConfig.CodeCoverage.Enabled = $true
    - Probably do some cleanup
 ---
 # Insert Demo here
-1. Reference Module file `Remove-Image` function to show what we're running and what we should expect
+1. Analyze Module function
+   1. Review module ExampleDevops `Remove-Image` function to show what we're running and what we should expect
    1. Simple function to remove an image if it exists.
    1. Try/Catch is nice because instead of returning with null, the cmdlet will throw if no image is found (Could just bury the error with `-EA SilentlyContinue`, but we want the messaging - sometimes there's a typo in a variable pointing to the wrong resource group 🤷‍♂️)
    1. Basically two test cases
-      - Image exists & we do nothing
+      - Image exists & we remove it
       - Image does not exist and we do nothing
       - NOTE: Figured that out by reading my code, but that's why test-driven development is best, because you won't have to guess what your cases are afterwards :)
-1. Two methods to invoke the test script - either run it directly or `Invoke-Pester`. Easier to run it locally while building, but must be certain to run as though part of CI/CD pipeline.
-   1. Read through the output of the test run - does it make sense?
 1. Analyze test file
    1. Explain scopes of the Pester blocks
       1. Describe the function
@@ -135,6 +135,5 @@ $PesterConfig.CodeCoverage.Enabled = $true
       1. In this test, the function can be run either within the `BeforeAll` block or `It` block - both have access to the `$params` hashtable since it was defined during the BeforeAll discovery phase
       1. I've placed this function run inside the BeforeAll block because you want your function to run before measuring the results with the `It` block
       1. This will vary based on the needs of the test (e.g. ForEach/TestCases)
-
-
-      InModuleScope?
+   1. Two methods to invoke the test script - either run it directly or `Invoke-Pester`. Easier to run it locally while building, but must be certain to run as though part of CI/CD pipeline.
+   1. Read through the output of the test run - does it make sense?

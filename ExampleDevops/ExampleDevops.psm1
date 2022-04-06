@@ -22,11 +22,11 @@ function Remove-Image {
     }
     catch
     {
-        Write-Information $_.Exception.Message
+        Write-Information $_.Exception.Message -InformationAction Continue
     }
     if ($imageExists)
     {
-        Write-Information "Image exists, removing old image."
+        Write-Information "Image $ImageName exists in $ResourceGroup, removing existing image." -InformationAction Continue
         Remove-AzImage -ResourceGroupName $ResourceGroup -ImageName $ImageName -Force -ErrorAction Stop
     }
 }
