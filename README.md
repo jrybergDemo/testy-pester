@@ -4,7 +4,6 @@
 - GitHub [devopsjesus](https://github.com/devopsjesus)
 - 7th year with MS Consulting
 - Automation & efficiency enthusiast
-- Presentation found at: https://github.com/jrybergDemo/testy-pester
 
 ---
 ## What is Pester (TL;DR version)
@@ -12,8 +11,8 @@
 - Pester is a testing and mocking framework for PowerShell
 - Mocking allows for the replacement of the behavior of any command
 - Tests go in *.Tests.ps1 files
-- Can be run locally, but typically goes in an automated workflow as build criteria
-- Basic Test structure
+- Can be run locally, but typically go in an automated workflow as build criteria
+- Basic Test structure to introduce Pester blocks
 ```PowerShell
 Describe 'Unit Test' {
 
@@ -21,7 +20,7 @@ Describe 'Unit Test' {
       # Test setup (run the function)
    }
 
-   Context 'Test Case' { # Not required
+   Context 'Test Milieu' { # Not required
 
       It "Test Assertion" {
             # Should do something
@@ -31,14 +30,13 @@ Describe 'Unit Test' {
 ```
 ---
 ## Running Pester Tests
-- Simple vs Advanced vs Legacy interfaces
+- Legacy vs Simple vs Advanced interfaces
 - Ignore the Simple & Legacy interfaces and just use the Pester Configuration object (advanced interface)!
 - Easy to call
-- Typically invoked recursively on a directory containing scripts or modules
-
 ```PowerShell
 Invoke-Pester -Configuration $PesterConfig
 ```
+- Typically invoked recursively on a directory containing scripts or modules
 
 ---
 ### 🧑‍💻 Create Pester Configuration
@@ -67,7 +65,7 @@ TestRegistry : TestRegistry configuration.
 $PesterConfig.Run.Path
 ````
 Output
-```Text
+```
 Default Description                                                                                 Value                                                                                                                                        ------- -----------                                                                                 -----                                                                                                                                        {.}     Directories to be searched for tests, paths directly to test files, or combination of both. {C:\Users\el-user}                                                                                                                           
 ```
 ---
