@@ -73,6 +73,9 @@ Default Description                                                             
 ---
 ## Discovery vs Run
 - Pester runs your test files in two phases: Discovery and Run.
+   - Massive change over v4 - variables are only available in their scopes
+   - IMPORTANT: Variables initialized in Discovery are NOT available in Run
+      - [Details here](https://pester-docs.netlify.app/docs/usage/discovery-and-run#execution-order)
 - During discovery, it 'scans' your test files and discovers all the Pester blocks.
   - `It`, `Before*`, & `After*` blocks are saved as ScriptBlocks but **not** executed.
     - Exceptions are Before/AfterDiscovery blocks
@@ -115,17 +118,22 @@ $PesterConfig.CodeCoverage.Enabled = $true
 # Insert Demo here
 1. Analyze Module function
    1. Review module ExampleDevops `Remove-Image` function to show what we're running and what we should expect
-   1. Simple function to remove an image if it exists.
-   1. Try/Catch is nice because instead of returning with null, the cmdlet will throw if no image is found (Could just bury the error with `-EA SilentlyContinue`, but we want the messaging - sometimes there's a typo in a variable pointing to the wrong resource group 🤷‍♂️)
-   1. Basically two test cases
-      - Image exists & we remove it
-      - Image does not exist and we do nothing
-      - NOTE: Figured that out by reading my code, but that's why test-driven development is best, because you won't have to guess what your cases are afterwards :)
+      1. Simple function to remove an image if it exists.
+      1. Try/Catch is nice because instead of returning with null, the cmdlet will throw if no image is found (Could just bury the error with `-EA SilentlyContinue`, but we want the messaging - sometimes there's a typo in a variable pointing to the wrong resource group 🤷‍♂️)
+      1. Basically two test cases
+         - Image exists & we remove it
+         - Image does not exist and we do nothing
+         - NOTE: Figured that out by reading my code, but that's why test-driven development is best, because you won't have to guess what your cases are afterwards :)
+   1. Review module ExampleDevops private function `Write-Message`
+      1. Will write to the appropriate stream based on message type
+      1. Three cases based on the three types of messages
+      1. Standardizes messaging output
+      1. Allows for throwing errors without terminating
 1. Analyze test file
    1. Explain scopes of the Pester blocks
-      1. Describe the function
-      1. Context is use case
-      1. It is each test per case
+      1. `Describe` the function
+      1. `Context` is use case
+      1. `It` is each test per case
          1. Can break these out as necessary, especially on longer functions
    1. Mocks are to keep the tests from actually doing anything IRL
       1. Essential for unit tests - instead of creating dependencies on actual Azure objects, we can pretend they exist. Save the real resources for the integration tests!
@@ -135,5 +143,5 @@ $PesterConfig.CodeCoverage.Enabled = $true
       1. In this test, the function can be run either within the `BeforeAll` block or `It` block - both have access to the `$params` hashtable since it was defined during the BeforeAll discovery phase
       1. I've placed this function run inside the BeforeAll block because you want your function to run before measuring the results with the `It` block
       1. This will vary based on the needs of the test (e.g. ForEach/TestCases)
-   1. Two methods to invoke the test script - either run it directly or `Invoke-Pester`. Easier to run it locally while building, but must be certain to run as though part of CI/CD pipeline.
+1. Two methods to invoke the test script - either run it directly or `Invoke-Pester`. Easier to run it locally while building, but must be certain to run as though part of CI/CD pipeline.
    1. Read through the output of the test run - does it make sense?

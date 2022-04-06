@@ -48,8 +48,8 @@ Describe 'Function Remove-Image' {
 
         It 'Does not remove the image' {
 
-            Should -Invoke Get-AzImage -Times 1 -Scope 'Context' -Exactly -ModuleName $global:moduleName
             Should -Invoke Select-AzSubscription -Times 1 -Scope 'Context' -Exactly -ModuleName $global:moduleName
+            Should -Invoke Get-AzImage -Times 1 -Scope 'Context' -Exactly -ModuleName $global:moduleName
             Should -Invoke Write-Information -Times 1 -Scope 'Context' -Exactly -ModuleName $global:moduleName
         }
     }
@@ -78,7 +78,7 @@ Describe 'Function Remove-Image' {
 
 InModuleScope $global:moduleName {
 
-    Describe 'Internal Function Write-Message' {
+    Describe 'Private Function Write-Message' {
 
         BeforeDiscovery {
             $writeMessageCases = @(

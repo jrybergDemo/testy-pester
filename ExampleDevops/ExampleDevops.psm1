@@ -40,7 +40,7 @@ function Write-Message {
         $Message,
         
         [Parameter(Mandatory)]
-        [ValidateSet("Info","Verbose","Error")]
+        [ValidateSet("Info", "Verbose", "Error")]
         [string]
         $MessageType
     )
@@ -52,7 +52,7 @@ function Write-Message {
         }
 
         "Verbose" {
-            Write-Verbose -Message $Message
+            Write-Verbose -Message $Message -Verbose
         }
 
         "Error" {
