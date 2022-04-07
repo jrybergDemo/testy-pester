@@ -3,7 +3,7 @@ BeforeDiscovery {
     $PesterPreference.Output.Verbosity = 'Detailed'
     $PesterPreference.CodeCoverage.Enabled = $true
 
-    # Module imports are outside of Before*/After* blocks to accomodate InModuleScope ... scope.
+    # Module imports are here to accomodate InModuleScope ... scope.
     $global:moduleName = Split-Path -Path (Split-Path -Path (Split-Path -Path $PSScriptRoot)) -Leaf
     $script:moduleRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
     Import-Module -FullyQualifiedName (Join-Path -Path $script:moduleRoot -ChildPath "$($global:moduleName).psd1") -Force
